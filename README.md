@@ -18,7 +18,7 @@ declare export default class Callable<A, B> extends Function {
 
 ## Examples:
 
-#### Example: Extend `Callable` with custom methods
+#### Extend `Callable` with custom methods
 ```js
 // @flow
 import Callable from "callable-class";
@@ -36,7 +36,7 @@ const foo = new Composable(x => [...x, 1])
 console.log(foo([])); // [1, 2, 3]
 ```
 
-#### Example: Extend `Callable` with custom fields and constructor
+#### Extend `Callable` with custom fields and constructor
 ```js
 // @flow
 import Callable from "callable-class";
