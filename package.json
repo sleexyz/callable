@@ -1,5 +1,5 @@
 {
-  "name": "callable",
+  "name": "callable-class",
   "version": "1.0.0",
   "description": "An extendable callable class",
   "main": "index.js",

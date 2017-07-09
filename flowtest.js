@@ -66,3 +66,5 @@ class ActionCreator<Type, A, B> extends Callable<A, B> {
 (new ActionCreator("incr", incr): ActionCreator<"incr", number, number>);
 // $FlowFixMe
 (new ActionCreator("incr", incr): ActionCreator<"incr", void, void>);
+// $FlowFixMe
+(new ActionCreator("incr", incr): ActionCreator<"notincr", void, void>);
