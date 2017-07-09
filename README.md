@@ -1,6 +1,7 @@
 # Callable
 
 [![NPM](https://nodei.co/npm/callable-class.png)](https://npmjs.org/package/callable-class)
+
 [![CircleCI](https://circleci.com/gh/sleexyz/callable.svg?style=svg)](https://circleci.com/gh/sleexyz/callable)
 
 
