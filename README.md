@@ -11,8 +11,11 @@ An extendable base class for callable classes, designed to work nicely with Flow
 
 ```js
 // @flow
-declare export default class Callable<A, B> extends Function {
-  constructor(fn: A => B): this & (A => B);
+declare class Callable<A, B> extends Function {
+  // See https://github.com/facebook/flow/issues/3084
+  // (A): B
+  $call: A => B;
+  constructor(A => B): this;
 }
 ```
 

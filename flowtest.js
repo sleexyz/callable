@@ -44,13 +44,19 @@ const incr = (x: number): number => x + 1;
 */
 
 class Composable<A, B> extends Callable<A, B> {
-  andThen<C>(g: B => C): Callable<A, C> {
+  andThen<C>(g: B => C): Composable<A, C> {
     return new Composable(x => g((this: any)(x)));
   }
 }
+(new Composable(incr).andThen(incr): number => number);
 (new Composable(incr).andThen(incr): Callable<number, number>);
+(new Composable(incr).andThen(incr): Composable<number, number>);
+// $FlowFixMe
+(new Composable(incr).andThen(incr): void => void);
 // $FlowFixMe
 (new Composable(incr).andThen(incr): Callable<void, void>);
+// $FlowFixMe
+(new Composable(incr).andThen(incr): Composable<void, void>);
 
 /*
    Callables should be able to have extended constructors
@@ -63,8 +69,12 @@ class ActionCreator<Type, A, B> extends Callable<A, B> {
     this.type = type;
   }
 }
+(new ActionCreator("incr", incr): number => number);
+(new ActionCreator("incr", incr): Callable<number, number>);
 (new ActionCreator("incr", incr): ActionCreator<"incr", number, number>);
 // $FlowFixMe
-(new ActionCreator("incr", incr): ActionCreator<"incr", void, void>);
+(new ActionCreator("incr", incr): void => void);
 // $FlowFixMe
-(new ActionCreator("incr", incr): ActionCreator<"notincr", void, void>);
+(new ActionCreator("incr", incr): Callable<void, void>);
+// $FlowFixMe
+(new ActionCreator("incr", incr): ActionCreator<"incr", void, void>);

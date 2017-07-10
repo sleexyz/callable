@@ -1,4 +1,5 @@
-const Callable = require("./");
+// @flow
+import Callable from "./";
 
 describe("Callable", () => {
   it("is a Callable", () => {
@@ -9,13 +10,14 @@ describe("Callable", () => {
     const fn = new Callable(x => x);
     expect(fn instanceof Function).toEqual(true);
   });
-  it("wraps a function", () => {
+  it("can be called", () => {
     const fn = new Callable(x => x + 1);
     expect(fn(0)).toEqual(1);
   });
   describe("when extending", () => {
-    class Foo extends Callable {
-      constructor(tag, fn) {
+    class Foo<A, B> extends Callable<A, B> {
+      tag: string;
+      constructor(tag: string, fn: A => B) {
         super(fn);
         this.tag = tag;
       }
@@ -23,6 +25,10 @@ describe("Callable", () => {
         return this.tag;
       }
     }
+    it("can be called", () => {
+      const fn = new Foo("incr", x => x + 1);
+      expect(fn(0)).toEqual(1);
+    });
     it("has additional fields", () => {
       const fn = new Foo("incr", x => x + 1);
       expect(fn.tag).toEqual("incr");
@@ -33,19 +39,25 @@ describe("Callable", () => {
     });
     it("has a valid prototype chain", () => {
       const fn = new Foo("incr", x => x + 1);
+      (fn: number => number);
+      (fn: Callable<number, number>);
+      (fn: Foo<number, number>);
       expect(fn instanceof Foo).toEqual(true);
       expect(fn instanceof Callable).toEqual(true);
       expect(fn instanceof Function).toEqual(true);
     });
     it("is able to hijack the incoming function", () => {
-      class Spy extends Callable {
-        constructor(fn) {
+      class Spy<A, B> extends Callable<A, B> {
+        spy: {
+          callCount: number
+        };
+        constructor(fn: A => B) {
           const spy = {
             callCount: 0
           };
-          super((x) => {
+          super((x: A): B => {
             spy.callCount += 1;
-            fn(x);
+            return fn(x);
           });
           this.spy = spy;
         }

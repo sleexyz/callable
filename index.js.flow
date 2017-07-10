@@ -1,5 +1,8 @@
 // @flow
 
 declare export default class Callable<A, B> extends Function {
-  constructor(fn: A => B): this & (A => B);
+  // See https://github.com/facebook/flow/issues/3084
+  // (A): B;
+  $call: A => B;
+  constructor(A => B): this;
 }
