@@ -52,7 +52,8 @@ class ActionCreator<Type, A, B> extends Callable<A, B> {
   }
 }
 
-const foo = new ActionCreator("foo", () => {});
+const foo = new ActionCreator("foo", x => x + 1);
 
 console.log(foo.type); // "foo"
+console.log(foo(0)); // 1
 ```
