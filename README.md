@@ -19,6 +19,21 @@ declare class Callable<A, B> extends Function {
 }
 ```
 
+## Notes:
+
+We mutate the prototype of the incoming function.
+
+```js
+// @flow
+import Callable from "callable-class";
+
+const f = x => x + 1;
+const g = new Callable(f);
+console.log(f === g) // true
+```
+
+
+
 ## Examples:
 
 #### Extend `Callable` with custom methods

@@ -1,7 +1,6 @@
 function Callable(f) {
-  const wrapped = x => f(x);
-  Object.setPrototypeOf(wrapped, this.constructor.prototype);
-  return wrapped;
+  Object.setPrototypeOf(f, this.constructor.prototype);
+  return f;
 }
 
 Callable.prototype = Object.create(Function.prototype);

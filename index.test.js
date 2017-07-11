@@ -14,6 +14,11 @@ describe("Callable", () => {
     const fn = new Callable(x => x + 1);
     expect(fn(0)).toEqual(1);
   });
+  it("mutates the incoming function", () => {
+    const f = x => x + 1;
+    const g = new Callable(f);
+    expect(f === g).toEqual(true);
+  });
   describe("when extending", () => {
     class Foo<A, B> extends Callable<A, B> {
       tag: string;
